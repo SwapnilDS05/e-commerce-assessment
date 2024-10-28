@@ -1,15 +1,18 @@
 # E-commerce Authentication and User Profile UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a simple e-commerce authentication and user profile UI. It includes user registration, login, forget-password and profile.
+
+We've used the following libraries for different use cases:
+- For styling - [styled-component](https://styled-components.com/)
+- For form management - [react-hook-form](https://react-hook-form.com/) with [yup](https://www.npmjs.com/package/yup)
+- For API calls - [axios](https://axios-http.com/)
+- For routing - [react-router-dom](https://reactrouter.com/)
+- For state management - [Context-API](https://legacy.reactjs.org/docs/context.html)
 
 ## Dependencies
 
-1. Node Version ~18.17.0
-2. NPM Version ~9.6.7
-
-## Styling Methodology
-
-We used styled component for styling and making layout of project
+1. Node Version >=18.17.0
+2. NPM Version >=9.6.7
 
 ## Project structure
 -----------------------------------------
@@ -60,8 +63,8 @@ We used styled component for styling and making layout of project
 Install dependencies with npm
 
 ```bash
-  git clone repo_name
-  cd assessment
+  git clone https://github.com/SwapnilDS05/e-commerce-assessment.git
+  cd e-commerce-assessment
   npm install
 ```
     
