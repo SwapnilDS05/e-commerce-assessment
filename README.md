@@ -20,7 +20,6 @@ We've used the following libraries for different use cases:
 **Server:** Python
 
 
-
 ## Dependencies
 
 1. Node Version >=18.17.0
@@ -89,8 +88,12 @@ Project clone and installing dependencies with npm
   cd e-commerce-assessment
   npm install
 ```
-    
-## Available Scripts
+
+## Responsiveness and any device-specific considerations
+
+Project will run smoothly on Desktop and Mobile devices with full responsiveness.
+
+## Usage
 
 In the project directory, you can run:
 
@@ -116,3 +119,9 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Ideas for Enhancements or Optimization
+
+- Implementing Redux for state management
+- Adding more features to the profile
+- Implementing loading or skeleton UI for placeholder
