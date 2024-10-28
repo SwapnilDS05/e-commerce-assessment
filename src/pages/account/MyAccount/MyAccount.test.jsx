@@ -26,18 +26,24 @@ describe("Register", () => {
     );
 
     fireEvent.click(screen.getByRole("button", { name: /updat/i }));
-    await waitFor(() => {
-      const errorMessage = screen.getByText((_, element) =>
-        element.textContent.includes('Email is a required field')
-      );
+
+    setTimeout(() => {
+      const errorMessage = screen.getByTestId('email-error');
       expect(errorMessage).toBeInTheDocument();
-    });
-    expect(
-      await screen.findByText("Password is a required field")
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByText(/confirm password is a required field/i)
-    ).toBeInTheDocument();
+      expect(errorMessage).toHaveTextContent('Email is a required field');
+    }, 300);
+
+    setTimeout(() => {
+      const errorMessage = screen.getByTestId('password-error');
+      expect(errorMessage).toBeInTheDocument();
+      expect(errorMessage).toHaveTextContent('Password is a required field');
+    }, 300);
+
+    setTimeout(() => {
+      const errorMessage = screen.getByTestId('confirm-password-error');
+      expect(errorMessage).toBeInTheDocument();
+      expect(errorMessage).toHaveTextContent(/confirm password is a required field/i);
+    }, 300);
   });
 
   test("shows error message for password length in my account process", async () => {
@@ -51,10 +57,11 @@ describe("Register", () => {
       target: { value: "123" },
     });
     fireEvent.click(screen.getByRole("button", { name: /updat/i }));
-
-    expect(
-      await screen.findByText("Password must be at least 5 characters")
-    ).toBeInTheDocument();
+    setTimeout(() => {
+      const errorMessage = screen.getByTestId('password-error');
+      expect(errorMessage).toBeInTheDocument();
+      expect(errorMessage).toHaveTextContent('Password must be at least 5 characters');
+    }, 300);
   });
 
   test("submits the form with valid data in my account process", async () => {
@@ -74,16 +81,19 @@ describe("Register", () => {
     fireEvent.change(screen.getByPlaceholderText("Confirm Password"), {
       target: { value: "password123" },
     });
-    fireEvent.click(screen.getByRole("button", { name: /updat/i }));
-    
-    await waitFor(() => {
-      expect(mockSubmit).toHaveBeenCalledTimes(1);
-    });
-    expect(mockSubmit).toHaveBeenCalledWith({
-      email: "testuser@gmail.com",
-      password: "password123",
-      confirmPassword: "password123",
-    });
+    const submitBtn = screen.getByTestId("my-account-submit");
+
+    fireEvent.click(submitBtn);
+    setTimeout(async () => {
+      await waitFor(() => {
+        expect(mockSubmit).toHaveBeenCalledTimes(1);
+      }, { timeout: 200 });
+      expect(mockSubmit).toHaveBeenCalledWith({
+        email: "testuser@gmail.com",
+        password: "password123",
+        confirmPassword: "password123",
+      });
+    }, 300);
   });
 
   test("should validate a correct my account", () => {

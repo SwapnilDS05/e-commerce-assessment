@@ -135,7 +135,7 @@ const MyAccount = ({ onSubmit }) => {
               )}
             />
             {errors.email && (
-              <FormHelperText>{errors.email.message}</FormHelperText>
+              <FormHelperText data-testid="email-error">{errors.email.message}</FormHelperText>
             )}
           </FormControl>
           <FormControl>
@@ -147,7 +147,7 @@ const MyAccount = ({ onSubmit }) => {
               )}
             />
             {errors.password && (
-              <FormHelperText id="">{errors.password.message}</FormHelperText>
+              <FormHelperText data-testid="password-error">{errors.password.message}</FormHelperText>
             )}
           </FormControl>
           <FormControl>
@@ -163,13 +163,13 @@ const MyAccount = ({ onSubmit }) => {
               )}
             />
             {errors.confirmPassword && (
-              <FormHelperText id="">
+              <FormHelperText data-testid="confirm-password-error">
                 {errors.confirmPassword.message}
               </FormHelperText>
             )}
           </FormControl>
 
-          <Button type="submit" disabled={isLoading}>
+          <Button type="submit" data-testid="my-account-submit" disabled={isLoading}>
             {isLoading ? "Updating..." : "Update"}
           </Button>
         </Form>

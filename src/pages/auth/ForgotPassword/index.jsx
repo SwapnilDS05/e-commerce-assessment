@@ -58,7 +58,6 @@ const ForgotPassword = ({ onSubmit }) => {
           }
         } catch (error) {
           setIsLoading(false);
-          console.error("Error during login:", error);
           toast.error(
             error.message ? `${error.message}` : "Something went wrong..."
           );

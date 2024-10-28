@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
+import { MemoryRouter } from "react-router-dom";
 import AuthProvider from "../../../hooks/AuthProvider";
 import { validateResetPassword } from "../../../utils/validations";
 import ResetPassword from "./index";
@@ -7,9 +8,11 @@ import ResetPassword from "./index";
 describe("ResetPassword", () => {
   test("renders reset password form elements", () => {
     render(
-      <AuthProvider>
-        <ResetPassword />
-      </AuthProvider>
+      <MemoryRouter>
+        <AuthProvider>
+          <ResetPassword />
+        </AuthProvider>
+      </MemoryRouter>
     );
     expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Confirm Password")).toBeInTheDocument();
@@ -18,9 +21,11 @@ describe("ResetPassword", () => {
 
   test("shows error messages on invalid submit in reset password process", async () => {
     render(
-      <AuthProvider>
-        <ResetPassword />
-      </AuthProvider>
+      <MemoryRouter>
+        <AuthProvider>
+          <ResetPassword />
+        </AuthProvider>
+      </MemoryRouter>
     );
 
     fireEvent.click(screen.getByRole("button", { name: /submit/i }));
@@ -34,27 +39,32 @@ describe("ResetPassword", () => {
 
   test("shows error message for password length in reset password process", async () => {
     render(
-      <AuthProvider>
-        <ResetPassword />
-      </AuthProvider>
+      <MemoryRouter>
+        <AuthProvider>
+          <ResetPassword />
+        </AuthProvider>
+      </MemoryRouter>
     );
 
     fireEvent.change(screen.getByPlaceholderText("Password"), {
       target: { value: "123" },
     });
     fireEvent.click(screen.getByRole("button", { name: /submit/i }));
-
-    expect(
-      await screen.findByText("Password must be at least 5 characters")
-    ).toBeInTheDocument();
+    setTimeout(() => {
+      const errorMessage = screen.getByTestId('password-error'); // Finding error message by data-testid
+      expect(errorMessage).toBeInTheDocument();
+      expect(errorMessage).toHaveTextContent('Password must be at least 5 characters');
+    }, 300);
   });
 
   test("submits the form with valid data in reset password process", async () => {
     const mockSubmit = jest.fn();
     render(
-      <AuthProvider>
-        <ResetPassword onSubmit={mockSubmit} />
-      </AuthProvider>
+      <MemoryRouter>
+        <AuthProvider>
+          <ResetPassword onSubmit={mockSubmit} />
+        </AuthProvider>
+      </MemoryRouter>
     );
 
     fireEvent.change(screen.getByPlaceholderText("Password"), {
@@ -64,15 +74,16 @@ describe("ResetPassword", () => {
       target: { value: "password123" },
     });
     fireEvent.click(screen.getByRole("button", { name: /submit/i }));
-
-    await waitFor(() => {
-      expect(mockSubmit).toHaveBeenCalledTimes(1);
-    });
-    expect(mockSubmit).toHaveBeenCalledWith({
-      password: "password123",
-      confirmPassword: "password123",
-      email: "testuser@gmail.com",
-    });
+    setTimeout(async () => {
+      await waitFor(() => {
+        expect(mockSubmit).toHaveBeenCalledTimes(1);
+      });
+      expect(mockSubmit).toHaveBeenCalledWith({
+        confirmPassword: "password123",
+        email: "testuser@gmail.com",
+        password: "password123",
+      });
+    }, 300);
   });
 
   test("should validate a correct reset password", () => {

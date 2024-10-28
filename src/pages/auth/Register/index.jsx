@@ -69,7 +69,6 @@ const Register = ({ onSubmit }) => {
           }
         } catch (error) {
           setIsLoading(false);
-          console.error('Error during register:', error);
           toast.error(error.message ? `${error.message}` : 'Something went wrong...');
         }
       }

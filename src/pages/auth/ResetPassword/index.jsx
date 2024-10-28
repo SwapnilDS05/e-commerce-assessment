@@ -111,7 +111,7 @@ const ResetPassword = ({ onSubmit }) => {
               )}
             />
             {errors.password && (
-              <FormHelperText id="">{errors.password.message}</FormHelperText>
+              <FormHelperText data-testid="password-error">{errors.password.message}</FormHelperText>
             )}
           </FormControl>
           <FormControl>
