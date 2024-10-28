@@ -26,6 +26,17 @@ We've used the following libraries for different use cases:
 1. Node Version >=18.17.0
 2. NPM Version >=9.6.7
 
+## API URL Configuration
+
+We've used demo server for API calling and can be changed from below file
+
+```
+├── src
+├── services
+│   ├── api.js
+```
+Change BASE_URL field value
+
 ## Project structure
 
 ```
