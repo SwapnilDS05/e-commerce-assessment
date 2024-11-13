@@ -88,7 +88,7 @@ const Login = ({ onSubmit }) => {
     <DefaultLayout>
       <TopMenu />
       <Container>
-        <h2>Login</h2>
+        <h1>Login</h1>
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
           <FormControl>
             <Controller
